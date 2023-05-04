@@ -1,0 +1,77 @@
+.main {
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 0%;
+}
+
+.holder {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 35%;
+	height: 90%;
+}
+
+.panel {
+	background: #0c0c0cb2;
+	width: 375px;
+	border-radius: 20px;
+	display: flex;
+	padding: 35px 50px 10px;
+	justify-content: space-between;
+	flex-direction: column;
+	align-items: center;
+}
+
+.panel h1 {
+	display: flex;
+	justify-content: space-between;
+	width: 80%;
+	margin-bottom: 15px;
+}
+.panel h1 span {
+	cursor: pointer;
+	font-size: 1.5rem;
+	color: #aaa;
+	padding-bottom: 3px;
+}
+
+.panel h1 span.selected {
+	color: #f3f3f3;
+	border-bottom: 1px solid #f3f3f3;
+	font-weight: bold;
+}
+
+.panel form {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+}
+.panel form p {
+	font-weight: bold;
+	color: #bb3344;
+}
+.panel a {
+	margin: 0 0 15px;
+	font-size: 0.9rem;
+}
+.panel form button {
+	background: #d9651c;
+	color: #f3f3f3;
+	text-transform: uppercase;
+	width: 60%;
+	border-radius: 20px;
+	border: none;
+	padding: 5px 0;
+	margin: 15px 0 10px;
+}
+
+@media screen and (max-width: 1100px) {
+	.main {
+		background-position: 80%;
+	}
+	.holder {
+		width: auto;
+	}
+}

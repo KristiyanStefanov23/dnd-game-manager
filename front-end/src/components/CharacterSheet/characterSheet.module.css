@@ -1,0 +1,53 @@
+.main {
+	height: 100%;
+	overflow: hidden;
+}
+
+.navigation {
+	display: flex;
+	justify-content: center;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 5;
+	background: #f3f3f3;
+	padding: 2px 0;
+}
+
+.navigation li {
+	margin: 0 10px;
+}
+
+.navigation li:hover {
+	cursor: pointer;
+	color: #777;
+}
+
+.navigation li.pushRight {
+	margin-right: auto;
+}
+
+.navigation li.pushLeft {
+	margin-left: auto;
+}
+
+.optPanel {
+	position: fixed;
+	width: 100px;
+	background: #f3f3f3;
+	top: 27px;
+	right: 0;
+	z-index: 5;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.navigation li.pushLeft:hover .optPanel {
+	display: flex;
+}
+@media print {
+	.navigation {
+		display: none;
+	}
+}

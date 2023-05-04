@@ -1,13 +1,22 @@
 const express = require('express');
-const app = express();
 const http = require('http');
+const socketIO = require('socket.io');
+const apiRouter = require('./api');
+const bodyParser = require('body-parser');
+const socketHandlers = require('./sockets');
+
+const app = express();
 const server = http.createServer(app);
-const { Server } = require('socket.io');
-const mapSocket = require('./functions/socket/socket');
-const io = new Server(server);
+const io = socketIO(server);
 
-mapSocket(io);
-app.use(express.static(__dirname + '\\build'));
-app.get('*', (req, res) => res.sendFile(__dirname + '\\build\\index.html'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-server.listen(3001, () => console.log('Listening on http://localhost:3001'));
+app.use('/api', apiRouter);
+app.use(express.static(`${__dirname}/build`));
+
+io.on('connection', socketHandlers);
+
+server.listen(process.env.PORT || 3001, () => {
+	console.log(`Server started on port ${server.address().port}`);
+});

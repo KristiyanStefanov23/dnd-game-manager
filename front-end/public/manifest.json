@@ -1,0 +1,10 @@
+{
+    "short_name": "My App",
+    "name": "My React App",
+    "icons": [
+    ],
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone"
+  }
+  

@@ -1,72 +1,72 @@
 /* #region defaults */
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
 :root {
-    --first-color: #1c1919;
-    --icons-color: #6f28f3;
-    --text-color: #080710;
-    --text-color-alt: #a3a3a3;
-    --text-color-light: #fff;
-    --container-color: #fff;
+	--first-color: #1c1919;
+	--icons-color: #6f28f3;
+	--text-color: #080710;
+	--text-color-alt: #a3a3a3;
+	--text-color-light: #fff;
+	--container-color: #fff;
 
-    --body-color: #f3f3f3;
-    --body-font: 'Poppins', arial;
-    --biggest-font-size: 2.25rem;
-    --h1-font-size: 1.5rem;
-    --h2-font-size: 1.25rem;
-    --h3-font-size: 1rem;
-    --normal-font-size: 0.876rem;
-    --small-font-size: 0.813rem;
-    --smaller-font-size: 0.75rem;
-    --icon-size: 1.2rem;
+	--body-color: #f3f3f3;
+	--body-font: 'Ubuntu', 'Poppins', arial;
+	--biggest-font-size: 2.25rem;
+	--h1-font-size: 1.5rem;
+	--h2-font-size: 1.25rem;
+	--h3-font-size: 1rem;
+	--normal-font-size: 0.876rem;
+	--small-font-size: 0.813rem;
+	--smaller-font-size: 0.75rem;
+	--icon-size: 1.2rem;
 }
 
 @media screen and (min-width: 768px) {
-    :root {
-        --biggest-font-size: 4rem;
-        --h1-font-size: 2.25rem;
-        --h2-font-size: 1.5rem;
-        --h3-font-size: 1.25rem;
-        --normal-font-size: 1rem;
-        --small-font-size: 0.876rem;
-        --smaller-font-size: 0.813rem;
-    }
+	:root {
+		--biggest-font-size: 4rem;
+		--h1-font-size: 2.25rem;
+		--h2-font-size: 1.5rem;
+		--h3-font-size: 1.25rem;
+		--normal-font-size: 1rem;
+		--small-font-size: 0.876rem;
+		--smaller-font-size: 0.813rem;
+	}
 }
 
 *,
 ::before,
 ::after {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 html {
-    scroll-behavior: smooth;
-    font-size: 16px;
+	scroll-behavior: smooth;
+	font-size: 16px;
 }
 
 body {
-    background: var(--body-color);
-    padding: 0;
-    margin: 0;
-    font-family: var(--body-font) !important;
-    line-height: 1.6;
-    color: var(--text-color);
+	background: var(--body-color);
+	padding: 0;
+	margin: 0;
+	font-family: var(--body-font) !important;
+	line-height: 1.6;
+	color: var(--text-color);
 }
 
 main {
-    height: 100vh;
+	height: 100vh;
 }
 
 h1 {
-    font-size: var(--h1-font-size);
+	font-size: var(--h1-font-size);
 }
 
 h2 {
-    font-size: var(--h2-font-size);
+	font-size: var(--h2-font-size);
 }
 
 h3 {
-    font-size: var(--h3-font-size);
+	font-size: var(--h3-font-size);
 }
 
 h1,
@@ -74,159 +74,28 @@ h2,
 h3,
 ul,
 p {
-    margin: 0;
-    color: var(--text-color);
+	margin: 0;
+	color: var(--text-color);
 }
 
 svg {
-    font-size: var(--icon-size);
-    width: var(--icon-size);
+	font-size: var(--icon-size);
+	width: var(--icon-size);
 }
 
 ul {
-    padding: 0;
-    list-style-type: none;
+	padding: 0;
+	list-style-type: none;
 }
 
 a {
-    text-decoration: none !important;
-    color: var(--text-color-light);
+	text-decoration: none !important;
+	color: var(--text-color-light);
 }
 
 img {
-    max-width: 100%;
-    height: auto;
+	max-width: 100%;
+	height: auto;
 }
 /* #endregion default */
 /* ^ Default properties ^ */
-nav {
-    background: #e67878;
-    height: 25px;
-}
-.navigation {
-    display: flex;
-    justify-content: flex-start;
-    width: 60%;
-    margin: auto;
-}
-
-.navigation li {
-    color: #f3f3f3;
-    margin-left: 10px;
-    cursor: pointer;
-}
-
-.navigation li:hover {
-    border-bottom: 1px solid #f3f3f3;
-}
-
-.navigation li:last-child {
-    margin-left: auto;
-}
-@media print {
-    .character-nav {
-        display: none;
-    }
-}
-
-main.login {
-    background: #000;
-}
-
-.glassmorphism-background {
-    width: 430px;
-    height: 520px;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    left: 50%;
-    top: 50%;
-}
-.glassmorphism-background .shape {
-    height: 200px;
-    width: 200px;
-    position: absolute;
-    border-radius: 50%;
-}
-.glassmorphism-background .shape:first-child {
-    background: linear-gradient(#1845ad, #23a2f6);
-    left: -80px;
-    top: -80px;
-}
-.glassmorphism-background .shape:last-child {
-    background: linear-gradient(to right, #ff512f, #f09819);
-    right: -30px;
-    bottom: -80px;
-}
-form.glassmorphism {
-    height: 520px;
-    width: 400px;
-    background-color: rgba(255, 255, 255, 0.13);
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
-    border-radius: 10px;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
-    padding: 50px 35px;
-}
-form.glassmorphism h3,
-form.glassmorphism label,
-form.glassmorphism input {
-    color: #fff;
-    letter-spacing: 0.5px;
-    outline: none;
-    border: none;
-}
-form.glassmorphism p {
-    margin: 15px 0;
-    color: #ff512f;
-}
-form.glassmorphism h3 {
-    font-size: 32px;
-    font-weight: 500;
-    line-height: 42px;
-    text-align: center;
-}
-
-form.glassmorphism label {
-    display: block;
-    margin-top: 30px;
-    font-size: 16px;
-    font-weight: 500;
-}
-form.glassmorphism input {
-    display: block;
-    height: 50px;
-    width: 100%;
-    background-color: #ffffff12;
-    border-radius: 3px;
-    padding: 0 10px;
-    margin-top: 8px;
-    font-size: 14px;
-    font-weight: 300;
-}
-::placeholder {
-    color: #e5e5e5;
-}
-form.glassmorphism button {
-    margin-top: 50px;
-    width: 100%;
-    background-color: #fff;
-    color: #080710;
-    padding: 15px 0;
-    font-size: 18px;
-    font-weight: 600;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.options-character {
-    border: 1px solid #000;
-    background-color: #ccc;
-    padding: 2px;
-    font-weight: normal;
-    cursor: pointer;
-}
