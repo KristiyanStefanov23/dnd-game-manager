@@ -48,10 +48,7 @@
 	justify-content: space-evenly;
 	align-items: center;
 }
-.panel form p {
-	font-weight: bold;
-	color: #bb3344;
-}
+
 .panel a {
 	margin: 0 0 15px;
 	font-size: 0.9rem;

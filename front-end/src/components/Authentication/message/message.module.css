@@ -1,0 +1,7 @@
+p.succ {
+	font-weight: bold;
+	color: #66cc55;
+}
+p.err {
+	color: #fe0142;
+}

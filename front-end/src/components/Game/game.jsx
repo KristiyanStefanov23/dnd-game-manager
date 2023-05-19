@@ -10,7 +10,7 @@ import './game.css';
 // 		return [key, decodeURIComponent(value)];
 // 	})
 // );
-const Game = () => {
+function Game() {
 	return (
 		<div className='game-container'>
 			<GamePanel>
@@ -22,6 +22,6 @@ const Game = () => {
 			</GamePanel>
 		</div>
 	);
-};
+}
 
 export default Game;

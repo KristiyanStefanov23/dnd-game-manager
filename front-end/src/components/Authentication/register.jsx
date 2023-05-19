@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login, register } from '../../utils/api';
+import { register } from '../../utils/api';
 import FormInput from './input/input';
 import { AlertCircle } from 'react-feather';
+import FormMessage from './message';
 
 function RegisterForm({ setAuth, isAuth }) {
 	const navigate = useNavigate();
-	const [error, setError] = useState('');
+	const [message, setMessage] = useState('');
+	const [error, setError] = useState(false);
 	const [formData, setFormData] = useState({
 		username: '',
 		password: '',
@@ -23,19 +25,12 @@ function RegisterForm({ setAuth, isAuth }) {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			await register(formData);
-			const res = await login(formData);
-			const expirationDate = new Date();
-			expirationDate.setDate(expirationDate.getDate() + 1); // set the expiration date to tomorrow
-
-			document.cookie = `token=${
-				res.token
-			}; expires=${expirationDate.toUTCString()}; path=/`;
-
-			setAuth(true);
-			navigate('/');
+			setError(false);
+			const res = await register(formData);
+			setMessage(res.data.message);
 		} catch ({ response }) {
-			setError(response.data.message);
+			setError(true);
+			setMessage(response.data.message);
 		}
 	};
 
@@ -65,11 +60,7 @@ function RegisterForm({ setAuth, isAuth }) {
 				value={formData.password}
 				type={'password'}
 			/>
-			{error && (
-				<p>
-					<AlertCircle strokeWidth={3} /> {error}
-				</p>
-			)}
+			{message && <FormMessage text={message} isError={error} />}
 			<button type='submit'>Register</button>
 		</form>
 	);

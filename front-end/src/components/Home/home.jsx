@@ -1,10 +1,13 @@
 import { Link, useNavigate } from 'react-router-dom/dist';
 import style from './home.module.css';
-import { useEffect } from 'react';
-import { ThumbsDown, ThumbsUp } from 'react-feather';
+import { useEffect, useState } from 'react';
+import PlannerPanel from './panel/plannerPannel';
+import GamePanel from './panel/gamePanel';
+import { LogOut, Settings, User } from 'react-feather';
 
 function Home({ isAuth, logout }) {
 	const navigate = useNavigate();
+	const [showProfile, setShowProfile] = useState(false);
 	useEffect(() => {
 		if (!isAuth) navigate('/auth');
 	}, [isAuth, navigate]);
@@ -18,64 +21,35 @@ function Home({ isAuth, logout }) {
 			<nav className={style.navBackground}>
 				<ul className={style.navBar}>
 					<li className={style.navBtnPrim}>
-						<Link to='/character'>Character</Link>
+						<Link to='/character'>Characters</Link>
 					</li>
-					<li className={style.navBtnSec}>
-						<button onClick={logout}>Log Out</button>
+					<li
+						className={style.navBtnSec}
+						onClick={() => setShowProfile(!showProfile)}
+					>
+						<User strokeWidth={1.5} size={30} />
 					</li>
 				</ul>
+				<div className={style.profileOpt} hidden={!showProfile}>
+					<ul>
+						<li>
+							<User strokeWidth={1.5} size={30} />
+							Profile
+						</li>
+						<li>
+							<Settings />
+							Settings
+						</li>
+						<li>
+							<LogOut />
+							Log out
+						</li>
+					</ul>
+				</div>
 			</nav>
 			<div className={style.content}>
-				<div className={style.panel}>
-					<h2 className='title'>Gaming session</h2>
-					<div className={style.timeList}>
-						<div className={style.timeItem}>
-							<span>
-								{'Name: '}
-								{'07/23/2023 08:00 pm'}
-							</span>
-							<span className={style.timeActions}>
-								<ThumbsDown />
-							</span>
-						</div>
-					</div>
-				</div>
-				<div className={style.panel}>
-					<h2 className='title'>Games</h2>
-					<div className={style.gameList}>
-						<p>
-							Test <Link to={'test'}>Join</Link>
-						</p>
-						<p>
-							Test <Link to={'test'}>Join</Link>
-						</p>
-						<p>
-							Test <Link to={'test'}>Join</Link>
-						</p>
-						<p>
-							Test <Link to={'test'}>Join</Link>
-						</p>
-						<p>
-							Test <Link to={'test'}>Join</Link>
-						</p>
-						<p>
-							Test <Link to={'test'}>Join</Link>
-						</p>
-						<p>
-							Test <Link to={'test'}>Join</Link>
-						</p>
-						<p>
-							Test <Link to={'test'}>Join</Link>
-						</p>
-						<p>
-							Test <Link to={'test'}>Join</Link>
-						</p>
-					</div>
-					<div className={style.gameBtns}>
-						<button>Create</button>
-						<button>Join</button>
-					</div>
-				</div>
+				<PlannerPanel />
+				<GamePanel />
 			</div>
 		</main>
 	);

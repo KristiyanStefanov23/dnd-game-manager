@@ -1,43 +1,46 @@
 {
-    "name": "front-end",
-    "version": "0.1.0",
-    "private": true,
-    "proxy": "http://localhost:3001",
-    "dependencies": {
-        "@pixi/react": "^7.0.2",
-        "axios": "^1.4.0",
-        "dnd-character-sheets": "^1.0.5",
-        "pixi.js": "^7.1.3",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
-        "react-feather": "^2.0.10",
-        "react-router-dom": "^6.8.2",
-        "react-scripts": "5.0.1",
-        "socket.io-client": "^4.6.1"
+	"name": "front-end",
+	"version": "0.1.0",
+	"private": true,
+	"proxy": "http://localhost:3001",
+	"dependencies": {
+		"axios": "^1.4.0",
+		"dnd-character-sheets": "^1.0.5",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-feather": "^2.0.10",
+		"react-router-dom": "^6.8.2",
+		"react-scripts": "5.0.1",
+		"socket.io-client": "^4.6.1"
+	},
+	"overrides": {
+        "dnd-character-sheets": {
+            "react": "^18.2.0"
+        }
     },
-    "scripts": {
-        "starts": "set HTTPS=true&&set SSL_CRT_FILE=C:/Users/Kris/Documents/Code/GitHub/dnd-game-manager/front-end/certificate/cert.crt&&set SSL_KEY_FILE=C:/Users/Kris/Documents/Code/GitHub/dnd-game-manager/front-end/certificate/cert.key&&npm start",
-        "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject"
-    },
-    "eslintConfig": {
-        "extends": [
-            "react-app",
-            "react-app/jest"
-        ]
-    },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
-    }
+	"scripts": {
+		"starts": "set HTTPS=true&&set SSL_CRT_FILE=C:/Users/Kris/Documents/Code/GitHub/dnd-game-manager/front-end/certificate/cert.crt&&set SSL_KEY_FILE=C:/Users/Kris/Documents/Code/GitHub/dnd-game-manager/front-end/certificate/cert.key&&npm start",
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject"
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	}
 }

@@ -14,7 +14,8 @@ export const login = async (data) => {
 
 export const register = async (data) => {
 	try {
-		await axios.post(`${API_BASE_URL}/auth/register`, data);
+		const result = await axios.post(`${API_BASE_URL}/auth/register`, data);
+		return result;
 	} catch (error) {
 		console.error(error);
 		throw error;
@@ -31,4 +32,10 @@ export const getCharacterSheet = async (userId) => {
 		console.error(error);
 		throw error;
 	}
+};
+
+export const createGame = async () => {
+	try {
+		await axios.post(`${API_BASE_URL}/`);
+	} catch (error) {}
 };
