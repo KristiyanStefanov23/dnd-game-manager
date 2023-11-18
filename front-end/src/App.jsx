@@ -4,53 +4,54 @@ import { CharacterSheet } from './components/CharacterSheet';
 import { Home } from './components/Home';
 import { Game } from './components/Game';
 import { Authenticate } from './components/Authentication';
+import Sheets from './components/CharacterSheet/sheets';
+import { logout } from './utils/api';
 
 function App() {
-	const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-	useEffect(() => {
-		console.log();
-		if (document.cookie) setIsAuthenticated(true);
-		else setIsAuthenticated(false);
-	}, []);
+    useEffect(() => {}, []);
 
-	const setAuth = (token) => setIsAuthenticated(token);
+    const setAuth = (token) => setIsAuthenticated(token);
 
-	const logout = () => {
-		document.cookie =
-			'token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-		setIsAuthenticated(false);
-	};
-	return (
-		<Router>
-			<Routes>
-				<Route
-					path='/'
-					element={<Home isAuth={isAuthenticated} logout={logout} />}
-				/>
-				<Route
-					path='/auth'
-					element={
-						<Authenticate
-							setAuth={setAuth}
-							isAuth={isAuthenticated}
-						/>
-					}
-				/>
-				<Route
-					path='/game'
-					element={<Game isAuthenticated={isAuthenticated} />}
-				/>
-				<Route
-					path='/character'
-					element={
-						<CharacterSheet isAuthenticated={isAuthenticated} />
-					}
-				/>
-				<Route path='*' element={<h1>404 Not Found</h1>} />
-			</Routes>
-		</Router>
-	);
+    const logoutClient = () => {
+        logout();
+        setIsAuthenticated(false);
+    };
+    return (
+        <Router>
+            <Routes>
+                <Route
+                    path="/"
+                    element={
+                        <Home isAuth={isAuthenticated} logout={logoutClient} />
+                    }
+                />
+                <Route
+                    path="/auth"
+                    element={
+                        <Authenticate
+                            setAuth={setAuth}
+                            isAuth={isAuthenticated}
+                        />
+                    }
+                />
+                <Route
+                    path="/game"
+                    element={<Game isAuth={isAuthenticated} />}
+                />
+                <Route
+                    path="/sheets"
+                    element={<Sheets isAuth={isAuthenticated} />}
+                />
+                <Route
+                    path="/sheets/:id"
+                    element={<CharacterSheet isAuth={isAuthenticated} />}
+                />
+                <Route path="*" element={<h1>404 Not Found</h1>} />
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;
