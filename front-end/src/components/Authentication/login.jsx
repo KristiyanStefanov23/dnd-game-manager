@@ -4,7 +4,8 @@ import { login } from '../../utils/api';
 import FormInput from './input/input';
 import { AlertCircle } from 'react-feather';
 
-function LoginPage({ setAuth, isAuth }) {
+function LoginForm({ setAuth, isAuth }) {
+	//useAuth
 	const navigate = useNavigate();
 	const [error, setError] = useState('');
 	const [formData, setFormData] = useState({
@@ -17,7 +18,7 @@ function LoginPage({ setAuth, isAuth }) {
 		}
 	}, [isAuth, navigate]);
 
-	const handleonChange = (e) => {
+	const handleOnChange = (e) => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
 
@@ -40,7 +41,7 @@ function LoginPage({ setAuth, isAuth }) {
 	return (
 		<form onSubmit={handleSubmit}>
 			<FormInput
-				onChange={handleonChange}
+				onChange={handleOnChange}
 				placeholder={'Username'}
 				name={'username'}
 				required
@@ -48,7 +49,7 @@ function LoginPage({ setAuth, isAuth }) {
 				value={formData.username}
 			/>
 			<FormInput
-				onChange={handleonChange}
+				onChange={handleOnChange}
 				placeholder={'Password'}
 				name={'password'}
 				required
@@ -66,4 +67,4 @@ function LoginPage({ setAuth, isAuth }) {
 	);
 }
 
-export default LoginPage;
+export default LoginForm;

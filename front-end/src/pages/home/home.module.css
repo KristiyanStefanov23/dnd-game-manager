@@ -1,0 +1,79 @@
+.main {
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 0% 75%;
+}
+
+.navBackground {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	height: 65px;
+	background: #00000040;
+}
+
+.navBar {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin: 0 2%;
+}
+
+.navBar a,
+.navBtnSec button {
+	text-transform: uppercase;
+	font-size: 0.75rem;
+	padding: 6px 20px;
+}
+
+.navBtnPrim a {
+	color: #f3f3f3;
+	border-radius: 20px;
+	background-color: #d9651c;
+	margin-right: 20px;
+}
+
+.navBtnSec {
+	border: 3px solid #ffffff00;
+	cursor: pointer;
+	border-radius: 100%;
+	background: #d9d9d9;
+}
+
+.navBtnSec svg {
+	width: 30px;
+	height: 30px;
+}
+
+.content {
+	height: 70%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.profileOpt {
+	margin: 0;
+	padding: 0 10px;
+	background: #f3f3f3;
+	user-select: none;
+	border-radius: 5px;
+	position: absolute;
+	top: 65px;
+	right: 0px;
+}
+
+.profileOpt li {
+	cursor: pointer;
+	margin: 5px 0;
+}
+
+.profileOpt li:hover {
+	border-bottom: 1px solid #000;
+}
+
+.profileOpt li svg {
+	margin-right: 5px;
+}

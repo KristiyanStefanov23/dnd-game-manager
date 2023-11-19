@@ -1,8 +1,8 @@
 import React from 'react';
-import GamePanel from './gamePanel';
-import GameInfo from './gameInfo';
-import GameActions from './gameActions';
-import PixiCanvas from './pixi/pixiCanvas';
+import GamePanel from '../../components/Game/gamePanel';
+import GameInfo from '../../components/Game/gameInfo';
+import GameActions from '../../components/Game/gameActions';
+import PixiCanvas from '../../components/Game/pixi/pixiCanvas';
 import './game.css';
 // const cookies = Object.fromEntries(
 // 	document.cookie.split('; ').map((c) => {

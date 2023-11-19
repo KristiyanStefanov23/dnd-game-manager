@@ -1,8 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom/dist';
 import style from './home.module.css';
 import { useEffect, useState } from 'react';
-import PlannerPanel from './panel/plannerPannel';
-import GamePanel from './panel/gamePanel';
+import PlannerPanel from '../../components/Home/plannerPannel';
+import GamePanel from '../../components/Home/gamePanel';
 import { LogOut, Settings, User } from 'react-feather';
 
 function Home({ isAuth, logout }) {

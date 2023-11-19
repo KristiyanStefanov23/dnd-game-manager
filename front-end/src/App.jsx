@@ -1,57 +1,53 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { CharacterSheet } from './components/CharacterSheet';
-import { Home } from './components/Home';
-import { Game } from './components/Game';
-import { Authenticate } from './components/Authentication';
-import Sheets from './components/CharacterSheet/sheets';
+
 import { logout } from './utils/api';
+import Home from './pages/home/home';
+import AuthPage from './pages/authentication/form';
+import Game from './pages/game/game';
+import CharacterSheet from './pages/characterSheet/characterSheet';
+import Sheets from './components/CharacterSheet/sheets';
 
 function App() {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+	const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    useEffect(() => {}, []);
+	const setAuth = (token) => setIsAuthenticated(token);
 
-    const setAuth = (token) => setIsAuthenticated(token);
-
-    const logoutClient = () => {
-        logout();
-        setIsAuthenticated(false);
-    };
-    return (
-        <Router>
-            <Routes>
-                <Route
-                    path="/"
-                    element={
-                        <Home isAuth={isAuthenticated} logout={logoutClient} />
-                    }
-                />
-                <Route
-                    path="/auth"
-                    element={
-                        <Authenticate
-                            setAuth={setAuth}
-                            isAuth={isAuthenticated}
-                        />
-                    }
-                />
-                <Route
-                    path="/game"
-                    element={<Game isAuth={isAuthenticated} />}
-                />
-                <Route
-                    path="/sheets"
-                    element={<Sheets isAuth={isAuthenticated} />}
-                />
-                <Route
-                    path="/sheets/:id"
-                    element={<CharacterSheet isAuth={isAuthenticated} />}
-                />
-                <Route path="*" element={<h1>404 Not Found</h1>} />
-            </Routes>
-        </Router>
-    );
+	const logoutClient = () => {
+		logout();
+		setIsAuthenticated(false);
+	};
+	return (
+		<Router>
+			<Routes>
+				<Route
+					path='/'
+					element={
+						<Home isAuth={isAuthenticated} logout={logoutClient} />
+					}
+				/>
+				<Route
+					path='/auth'
+					element={
+						<AuthPage setAuth={setAuth} isAuth={isAuthenticated} />
+					}
+				/>
+				<Route
+					path='/game'
+					element={<Game isAuth={isAuthenticated} />}
+				/>
+				<Route
+					path='/sheets'
+					element={<Sheets isAuth={isAuthenticated} />}
+				/>
+				<Route
+					path='/sheets/:id'
+					element={<CharacterSheet isAuth={isAuthenticated} />}
+				/>
+				<Route path='*' element={<h1>404 Not Found</h1>} />
+			</Routes>
+		</Router>
+	);
 }
 
 export default App;
