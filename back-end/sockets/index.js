@@ -1,12 +1,12 @@
-const gameHandlers = require('./game');
+import gameHandlers from './game.js';
 
-module.exports = (socket) => {
-  console.log(`New client connected: ${socket.id}`);
-  
-  // Handle game-related events
-  gameHandlers(socket);
+export default (socket) => {
+	console.log(`New client connected: ${socket.id}`);
 
-  socket.on('disconnect', () => {
-    console.log(`Client disconnected: ${socket.id}`);
-  });
+	// Handle game-related events
+	gameHandlers(socket);
+
+	socket.on('disconnect', () => {
+		console.log(`Client disconnected: ${socket.id}`);
+	});
 };

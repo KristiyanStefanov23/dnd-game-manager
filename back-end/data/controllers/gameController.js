@@ -1,14 +1,14 @@
-const { getUserGame, updateGame, addToGame } = require('../db');
-const {
+import {
+	getUserGame,
+	updateGame as dbUpdateGame,
+	addToGame,
 	saveGame,
-	createGame,
+	createGame as dbCreateGame,
 	getIdFromSession,
 	listUserGames,
-} = require('../db');
+} from '../db.js';
 
-const exportObj = {};
-
-exportObj.joinGame = async function (req, res) {
+export const joinGame = async function (req, res) {
 	try {
 		const token = req.headers['x-dnd-sessionid'];
 		const uid = await getIdFromSession(token);
@@ -25,14 +25,14 @@ exportObj.joinGame = async function (req, res) {
 	}
 };
 
-exportObj.createGame = async (req, res) => {
+export const createGame = async (req, res) => {
 	try {
 		if (!req.body?.gameName)
 			return res.status(400).json({ message: 'Missing argument' });
 		const { gameName } = req.body;
 		const token = req.headers['x-dnd-sessionid'];
 		const uid = await getIdFromSession(token);
-		const newGame = createGame({ hostId: uid, gameName });
+		const newGame = dbCreateGame({ hostId: uid, gameName });
 		saveGame(newGame);
 		res.status(201).json(newGame);
 	} catch (error) {
@@ -42,7 +42,7 @@ exportObj.createGame = async (req, res) => {
 	// Create a new game
 };
 
-exportObj.deleteGame = (req, res) => {
+export const deleteGame = (req, res) => {
 	try {
 		const { id } = req.params;
 		return res.status(501).json({ message: 'Not implemented' });
@@ -53,13 +53,13 @@ exportObj.deleteGame = (req, res) => {
 	// Delete the game with the given ID
 };
 
-exportObj.updateGame = async (req, res) => {
+export const updateGame = async (req, res) => {
 	try {
 		const { action, id } = req.params;
 		const { param } = req.body;
 		const token = req.headers['x-dnd-sessionid'];
 		const uid = await getIdFromSession(token);
-		const result = await updateGame({ action, id, uid, param });
+		const result = await dbUpdateGame({ action, id, uid, param });
 		if (!result.success)
 			return res.status(result.code).json({ message: result.message });
 		return res.status(200).json();
@@ -69,7 +69,7 @@ exportObj.updateGame = async (req, res) => {
 	}
 	// Update the game with the given ID
 };
-exportObj.listGames = async (req, res) => {
+export const listGames = async (req, res) => {
 	// Return a list of games
 	try {
 		const token = req.headers['x-dnd-sessionid'];
@@ -82,7 +82,7 @@ exportObj.listGames = async (req, res) => {
 		res.status(500).json({ message: 'Server error' });
 	}
 };
-exportObj.getGame = async (req, res) => {
+export const getGame = async (req, res) => {
 	try {
 		const { id } = req.params;
 		const token = req.headers['x-dnd-sessionid'];
@@ -96,4 +96,3 @@ exportObj.getGame = async (req, res) => {
 	}
 	// Return the game with the given ID
 };
-module.exports = exportObj;

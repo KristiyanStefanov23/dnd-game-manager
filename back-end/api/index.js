@@ -1,7 +1,7 @@
-const { Router } = require('express');
-const gameRouter = require('./game');
-const authRouter = require('./auth');
-const charRouter = require('./character');
+import { Router } from 'express';
+import gameRouter from './game.js';
+import authRouter from './auth.js';
+import charRouter from './character.js';
 
 const router = Router();
 
@@ -9,4 +9,4 @@ router.use('/game', gameRouter);
 router.use('/auth', authRouter);
 router.use('/character', charRouter);
 
-module.exports = router;
+export default router;

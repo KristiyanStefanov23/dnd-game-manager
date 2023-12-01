@@ -1,1 +1,14 @@
-{"fb24f51a-0159-4ef0-a5ff-4844f249a08d":{"username":"nerida","email":"kingsterss07@gmail.com","password":"$2b$06$dcmRD2v2G9pHWMHMKMWyDOTv6Jcq6TOYlpCJibrPkDUmWBaHt7/Kq","verified":false,"games":[],"characters":["52b45b80-e055-4b2c-902b-e55b00da209b","e2d79c00-bc5b-48fe-8335-592be7571799"]}}
+{
+	"119327aa-7607-4447-8c6c-387670ee2145": {
+		"username": "nerida",
+		"email": "kingsterss07@gmail.com",
+		"password": "$2b$06$vJzqCzT2/ntZEkc4jRT1jeVvEHcU.NjcAkF09XIOLdrvb6rr9FYCW",
+		"verified": false,
+		"games": [],
+		"characters": [
+			"52b45b80-e055-4b2c-902b-e55b00da209b",
+			"e2d79c00-bc5b-48fe-8335-592be7571799",
+			"70e068b4-9b5e-4f60-817a-0cc19d8c1733"
+		]
+	}
+}

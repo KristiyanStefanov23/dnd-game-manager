@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import style from './form.module.css';
-import Login from '../../components/Authentication/login';
-import Register from '../../components/Authentication/register';
+import LoginForm from './login';
+import RegisterForm from './register';
 
 function AuthPage({ setAuth, isAuth }) {
-	const windows = [Login, Register];
+	const windows = [LoginForm, RegisterForm];
 	const [curr, setCurr] = useState(0);
 	const Window = windows[curr];
 	return (

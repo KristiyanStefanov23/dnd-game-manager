@@ -1,15 +1,15 @@
-const express = require('express');
-const {
+import { Router } from 'express';
+import {
 	listGames,
 	getGame,
 	updateGame,
 	deleteGame,
 	createGame,
 	joinGame,
-} = require('../data/controllers/gameController');
-const { verifyToken } = require('../data/db');
+} from '../data/controllers/gameController.js';
+import { verifyToken } from '../data/db.js';
 
-const router = express.Router();
+const router = Router();
 
 router.post('/join/:inviteId', verifyToken, joinGame);
 router.get('/', verifyToken, listGames);
@@ -18,4 +18,4 @@ router.post('/', verifyToken, createGame);
 router.put('/:action/:id', verifyToken, updateGame);
 router.delete('/:id', verifyToken, deleteGame);
 
-module.exports = router;
+export default router;

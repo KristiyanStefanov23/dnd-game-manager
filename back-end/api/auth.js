@@ -1,16 +1,16 @@
-const express = require('express');
-const {
-    register,
-    login,
-    logout,
-    ping,
-} = require('../data/controllers/authenticationController');
-const { verifyToken } = require('../data/db');
-const router = express.Router();
+import { Router } from 'express';
+import {
+	register,
+	login,
+	logout,
+	ping,
+} from '../data/controllers/authenticationController.js';
+import { verifyToken } from '../data/db.js';
+const router = Router();
 
 router.post('/ping', verifyToken, ping);
 router.post('/register', register);
 router.post('/login', login);
 router.post('/logout', verifyToken, logout);
 
-module.exports = router;
+export default router;

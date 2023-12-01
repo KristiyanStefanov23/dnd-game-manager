@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../../utils/api';
-import FormInput from './input/input';
+import FormInput from '../../components/Authentication/input/input';
 import { AlertCircle } from 'react-feather';
 
 function LoginForm({ setAuth, isAuth }) {

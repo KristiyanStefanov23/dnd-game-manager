@@ -37,14 +37,14 @@ function CharacterSheet() {
 		const fileInp = document.createElement('input');
 		fileInp.type = 'file';
 		fileInp.onchange = (e) => {
-			const file = e.target;
-			if (file.files.length === 0) return;
-			if (file.files[0].type !== 'application/json')
+			const { files } = e.target;
+			if (files.length === 0) return;
+			if (files[0].type !== 'application/json')
 				return alert('File needs to be .json');
 			const reader = new FileReader();
 			reader.onload = (file) =>
 				setCharacter(JSON.parse(file.target.result));
-			reader.readAsText(file.files[0]);
+			reader.readAsText(files[0]);
 		};
 		fileInp.click();
 	}
@@ -60,7 +60,7 @@ function CharacterSheet() {
 					<li onClick={() => setPage(2)}>Spell</li>
 					<li onClick={() => setPage(-1)}>All</li>
 					<li className={style.pushLeft}>
-						<input type='radio' name='' id='' />
+						<input type='radio' />
 					</li>
 					<li>More</li>
 					<div className={style.optPanel}>

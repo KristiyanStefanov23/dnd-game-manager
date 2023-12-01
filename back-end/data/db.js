@@ -1,17 +1,15 @@
-const { writeFileSync, readFileSync, readFile } = require('fs');
-const { join } = require('path');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const { v4 } = require('uuid');
-const { gameModel, getGameModel } = require('./models/game');
-
-const exportObj = {};
+import { writeFileSync, readFileSync, readFile } from 'fs';
+import { join } from 'path';
+import { hash, compare } from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import { v4 } from 'uuid';
+import { gameModel, getGameModel } from './models/game.js';
 
 const SECRET_KEY = 'DnDisAboutFriends...';
-const USER_FILE = join(__dirname, './users.json');
-const SESSIONS_FILE = join(__dirname, './sessions.json');
-const GAMES_FILE = join(__dirname, './games.json');
-const SHEETS_FOLDER = join(__dirname, './sheets/');
+const USER_FILE = 'data/users.json';
+const SESSIONS_FILE = 'data/sessions.json';
+const GAMES_FILE = 'data/games.json';
+const SHEETS_FOLDER = 'data/sheets/';
 
 async function fetchJson(type) {
 	const file = await readFileSync(type);
@@ -30,11 +28,11 @@ async function saveSession(token, userId) {
 	writeFileSync(SESSIONS_FILE, JSON.stringify(sessions));
 }
 //#region Authentication
-exportObj.getIdFromSession = async (token) => {
+export const getIdFromSession = async (token) => {
 	const sessions = await fetchJson(SESSIONS_FILE);
 	return Object.keys(sessions).find((id) => sessions[id] === token);
 };
-exportObj.verifyToken = async (req, res, next) => {
+export const verifyToken = async (req, res, next) => {
 	const token = req.headers['x-dnd-sessionid'];
 	if (!token) return res.status(498).json({ message: 'Invalid token' });
 	const currentTime = Math.floor(Date.now() / 1000);
@@ -49,7 +47,7 @@ exportObj.verifyToken = async (req, res, next) => {
 	const sessions = sessionsRaw.byteLength <= 0 ? {} : JSON.parse(sessionsRaw);
 	const uid = Object.keys(sessions).find((id) => (sessions[id] = token));
 	if (!uid) return res.status(498).json({ message: 'Token expired/invalid' });
-	if (sessions[uid] !== token) return next();
+	next();
 };
 
 const deleteSession = async (token) => {
@@ -62,7 +60,7 @@ const deleteSession = async (token) => {
 	writeFileSync(SESSIONS_FILE, JSON.stringify(sessions));
 	return true;
 };
-exportObj.registerUser = async (callback, credentials) => {
+export const registerUser = async (callback, credentials) => {
 	try {
 		const { username, password, email } = credentials;
 		const users = await fetchJson(USER_FILE);
@@ -73,7 +71,7 @@ exportObj.registerUser = async (callback, credentials) => {
 			});
 		// Hash password
 		const saltRounds = 6;
-		const hashedPassword = await bcrypt.hash(password, saltRounds);
+		const hashedPassword = await hash(password, saltRounds);
 		// make sure the id is unique
 		const uid = generateId(Object.keys(users));
 		users[uid] = {
@@ -92,7 +90,7 @@ exportObj.registerUser = async (callback, credentials) => {
 	}
 };
 
-exportObj.loginUser = async (callback, credentials) => {
+export const loginUser = async (callback, credentials) => {
 	const { username, password } = credentials;
 	const users = await fetchJson(USER_FILE);
 	if (!Object.keys(users))
@@ -108,7 +106,7 @@ exportObj.loginUser = async (callback, credentials) => {
 			code: 401,
 			message: 'Wrong username or password.',
 		});
-	const match = await bcrypt.compare(password, users[userId].password);
+	const match = await compare(password, users[userId].password);
 	if (!match)
 		return callback(undefined, {
 			code: 401,
@@ -120,7 +118,7 @@ exportObj.loginUser = async (callback, credentials) => {
 	return callback({ token });
 };
 
-exportObj.logoutUser = async (callback, { token }) => {
+export const logoutUser = async (callback, { token }) => {
 	const tokenDeleted = await deleteSession(token);
 	if (tokenDeleted) return callback({ message: 'Successfully Logged out' });
 };
@@ -144,14 +142,14 @@ setInterval(deleteExpiredTokens, 12 * (60 * 60 * 1000));
  * @param {{hostId: string, gameName: string}} data
  * @returns {gameModel} Game's key, data
  */
-exportObj.createGame = (data) => {
+export const createGame = (data) => {
 	const newGame = getGameModel(data);
 	const id = v4();
 	const gameObj = { [id]: { ...newGame } };
 	return gameObj;
 };
 
-exportObj.addToGame = async (data) => {
+export const addToGame = async (data) => {
 	const { cid, uid, iid } = data;
 	const users = await fetchJson(USER_FILE);
 	const games = await fetchJson(GAMES_FILE);
@@ -164,7 +162,7 @@ exportObj.addToGame = async (data) => {
 	return true;
 };
 
-exportObj.saveGame = async (gameData) => {
+export const saveGame = async (gameData) => {
 	const [id, data] = Object.entries(gameData)[0];
 	if (!(id && typeof data === 'object' && Object.keys(data)))
 		return console.log('Data in wrong format');
@@ -173,7 +171,7 @@ exportObj.saveGame = async (gameData) => {
 	writeFileSync(GAMES_FILE, JSON.stringify(games));
 };
 
-exportObj.listUserGames = async (id) => {
+export const listUserGames = async (id) => {
 	const games = await fetchJson(GAMES_FILE);
 	const joinedGamesIds = Object.keys(games).filter(
 		(gameId) => games[gameId].players?.[id] || games[gameId].hostId === id
@@ -185,12 +183,12 @@ exportObj.listUserGames = async (id) => {
 	return userGames;
 };
 
-exportObj.getUserGame = async (gid, uid) => {
-	const games = await exportObj.listUserGames(uid);
+export const getUserGame = async (gid, uid) => {
+	const games = await listUserGames(uid);
 	return games[gid];
 };
 
-exportObj.updateGame = async (data) => {
+export const updateGame = async (data) => {
 	const result = {
 		code: 200,
 		success: true,
@@ -238,7 +236,7 @@ exportObj.updateGame = async (data) => {
 };
 //#endregion Game
 //#region Characters
-exportObj.createSheet = async (userId) => {
+export const createSheet = async (userId) => {
 	const id = v4();
 	const users = await fetchJson(USER_FILE);
 	users[userId].characters.push(id);
@@ -246,7 +244,7 @@ exportObj.createSheet = async (userId) => {
 	return true;
 };
 
-exportObj.getSheets = async (userId) => {
+export const getSheets = async (userId) => {
 	const users = await fetchJson(USER_FILE);
 	const characterIds = users[userId].characters;
 	const data = {};
@@ -268,7 +266,7 @@ exportObj.getSheets = async (userId) => {
 	return data;
 };
 
-exportObj.getSheet = async (userId, sheetId) => {
+export const getSheet = async (userId, sheetId) => {
 	const users = await fetchJson(USER_FILE);
 	const characterIds = users[userId].characters;
 	try {
@@ -282,7 +280,7 @@ exportObj.getSheet = async (userId, sheetId) => {
 	}
 };
 
-exportObj.updateSheet = async (userId, sheetId, data) => {
+export const updateSheet = async (userId, sheetId, data) => {
 	const users = await fetchJson(USER_FILE);
 	const characterIds = users[userId].characters;
 	try {
@@ -298,5 +296,3 @@ exportObj.updateSheet = async (userId, sheetId, data) => {
 	}
 };
 //#endregion Characters
-
-module.exports = exportObj;
